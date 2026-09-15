@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-ink-100;
+  }
+
+  body {
+    background-color: #faf8f3;
+    background-image: radial-gradient(circle at 1px 1px, rgba(27, 42, 74, 0.05) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+
+  ::selection {
+    background-color: #d3b98c;
+    color: #101832;
+  }
+
+  :focus-visible {
+    outline: 2px solid #1b2a4a;
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .arabic-text {
+    font-family:
+      'Noto Sans Arabic',
+      Tahoma,
+      'Segoe UI',
+      var(--font-sans),
+      Arial,
+      sans-serif;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

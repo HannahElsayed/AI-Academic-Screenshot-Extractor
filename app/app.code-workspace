@@ -1,0 +1,20 @@
+
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../lib"
+		},
+		{
+			"path": "../components"
+		},
+		{
+			"path": "../types"
+		},
+		{
+			"path": "../public"
+		}
+	]
+}

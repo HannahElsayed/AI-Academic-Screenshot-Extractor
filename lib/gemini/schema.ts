@@ -1,12 +1,6 @@
 import { z } from 'zod';
 
-/**
- * Structural schema for what Gemini must return. This is intentionally
- * permissive on types that the model sometimes returns as strings
- * (e.g. "3.67" instead of 3.67) — lib/validation/validator.ts does the
- * stricter numeric/consistency checks afterward. This layer only guards
- * against a malformed or incomplete response.
- */
+
 
 const nullableString = z.union([z.string(), z.null()]).optional().nullable();
 const nullableNumberLike = z
@@ -52,11 +46,6 @@ export const rawExtractionSchema = z.object({
 
 export type RawExtractionParsed = z.infer<typeof rawExtractionSchema>;
 
-/**
- * The JSON schema description handed to Gemini directly in the prompt.
- * Kept as a plain string (rather than derived from the Zod schema) so the
- * wording shown to the model is easy to read and tune independently.
- */
 export const GEMINI_JSON_SCHEMA_DESCRIPTION = `{
   "student": {
     "name": string | null,

@@ -1,6 +1,5 @@
 import type { ExtractedCourse, ExtractedSemester, ExtractedStudent, RawExtractionResult } from './academic';
 
-/** Same shape as ExtractedCourse, plus a stable client-side id for list rendering/edits. */
 export interface EditableCourse extends ExtractedCourse {
   uiId: string;
 }

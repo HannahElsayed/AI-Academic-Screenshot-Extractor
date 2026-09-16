@@ -1,10 +1,4 @@
-/**
- * Domain types for the AI Academic Screenshot Data Extractor.
- *
- * These mirror the JSON schema Gemini is instructed to return. Anything the
- * model could not confidently read comes back as `null` rather than a
- * guessed value — see lib/gemini/schema.ts for the schema Gemini is given.
- */
+
 
 export type Nullable<T> = T | null;
 
@@ -40,21 +34,19 @@ export interface ExtractedOverall {
   total_credit_hours: Nullable<number>;
 }
 
-/** The raw shape Gemini is asked to return. */
 export interface RawExtractionResult {
   student: ExtractedStudent;
   semesters: ExtractedSemester[];
   overall: ExtractedOverall;
 }
 
-/** A row-level issue found during backend validation. */
 export interface ValidationIssue {
   path: string;
   message: string;
   severity: 'warning' | 'error';
 }
 
-/** The result returned by the /api/extract route to the frontend. */
+
 export interface ExtractionResponse {
   success: boolean;
   data?: RawExtractionResult;

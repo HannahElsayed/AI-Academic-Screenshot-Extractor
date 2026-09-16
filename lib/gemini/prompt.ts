@@ -1,10 +1,6 @@
 import { GEMINI_JSON_SCHEMA_DESCRIPTION } from './schema';
 
-/**
- * Instruction prompt for the academic-extraction model call. Kept in its
- * own module so it can be iterated on independently of the service that
- * calls Gemini.
- */
+
 export const EXTRACTION_SYSTEM_PROMPT = `You are an academic document extraction AI. Analyze the provided university academic results screenshot. Extract all visible academic information accurately. Identify semesters and their associated courses. Preserve Arabic and English text exactly as it appears, including diacritics if present. Return ONLY valid JSON following the provided schema — no prose, no markdown code fences, no commentary before or after the JSON.
 
 Rules you must follow:

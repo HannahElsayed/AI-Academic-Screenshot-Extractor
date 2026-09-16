@@ -3,12 +3,6 @@ import { EXTRACTION_SYSTEM_PROMPT, buildUserPrompt } from './prompt';
 import { rawExtractionSchema } from './schema';
 import type { RawExtractionResult } from '@/types/academic';
 
-/**
- * Narrow interface the rest of the app depends on. Swapping models or
- * providers later (a different Gemini model, a fine-tuned endpoint, an
- * OCR fallback, etc.) means writing a new class that implements this and
- * wiring it up in getExtractionService() below — nothing else changes.
- */
 export interface AcademicExtractionService {
   extractFromImage(input: ExtractionInput): Promise<ExtractionServiceResult>;
 }
@@ -95,14 +89,14 @@ class GeminiAcademicExtractionService implements AcademicExtractionService {
   }
 }
 
-/** Gemini is asked for raw JSON, but strip fences defensively in case it wraps it anyway. */
+
 function stripCodeFences(text: string): string {
   const trimmed = text.trim();
   const fenceMatch = trimmed.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
   return fenceMatch?.[1] ?? trimmed;
 }
 
-/** Coerce numeric-looking strings ("3.67") into numbers; leave true nulls/invalid values as null. */
+
 function toNullableNumber(value: number | string | null | undefined): number | null {
   if (value === null || value === undefined) return null;
   if (typeof value === 'number') return Number.isFinite(value) ? value : null;
@@ -144,11 +138,7 @@ function normalizeParsed(parsed: ReturnType<typeof rawExtractionSchema.parse>): 
 
 let cachedService: AcademicExtractionService | null = null;
 
-/**
- * Factory for the active extraction service. Centralizing this means a
- * future provider swap (or an OCR fallback per the roadmap) only touches
- * this function.
- */
+
 export function getExtractionService(): AcademicExtractionService {
   if (cachedService) return cachedService;
 
